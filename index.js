@@ -42,9 +42,12 @@ async function getRandomCountry(row,table,keyname, key) {
 
 
 //to uppercase
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+function capitalizeEachWord(string) {
+    return string
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+}
 
 function flagEmojiToCountryCode(emoji) {
     // Get the Unicode code points for each character in the emoji
@@ -74,7 +77,7 @@ console.log(data);
 app.post("/add",async(req,res)=>{
     try{
     var userinput=req.body.country;
-    var country=capitalizeFirstLetter(userinput);
+    var country=capitalizeEachWord(userinput);
     var data= await getRandomCountry("*","flags","name",country);
     var userEnteredFlag=data[0].flag;
     
