@@ -76,7 +76,7 @@ app.post("/add",async(req,res)=>{
     var userinput=req.body.country;
     var country=capitalizeFirstLetter(userinput);
     var data= await getRandomCountry("*","flags","name",country);
-    var userEnteredFlag=flagEmojiToCountryCode(data[0].flag);
+    var userEnteredFlag=data[0].flag;
     
         if(visitedCountries.find(flag=>flag===userEnteredFlag)){
 
